@@ -1,0 +1,14 @@
+/* (reduce guest cards grid to one column on mobile phones) */
+/* (increase guest cards grid to two columns on small desktops and tablets) */
+@media only screen and (min-width: 768px){
+    #cards{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* (increase guest cards grid to three columns on most desktops) */
+@media only screen and (min-width: 1224px){
+    #cards{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- required for responsivness -->
+
+    <!-- >>> CHANGE PAPE TITLE HERE <<< -->  
+    <title>GUESTBOOK</title>
+
+    <!-- [External Dependencies] -->
+    <link rel="stylesheet" href="https://unpkg.com/carbon-components@10.2.0/css/carbon-components.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://unpkg.com/carbon-components/scripts/carbon-components.min.js"></script>
+
+    <!-- [Custom Dependencies] -->
+    <link rel="stylesheet" href="css/custom.css"/>
+    <link rel="stylesheet" href="css/responsive.css"/>
+    <script src="js/main.js"></script>
+  </head>
+
+  <body class="bx--body">
+    <div class="container">
+      <!-- [Page Body] -->
+
+      <div class="header">
+        <!-- [Design Header] (includes logo, logo-background and title) -->
+
+        <div class="bx--tile center-content header-background">
+          <div class="logo-wrapper">
+
+            <!-- >>> CHANGE LOGO HERE <<< -->  
+            <img class="logo" src="./assets/images/ibm.svg" alt="logo">
+
+          </div>
+        </div>
+
+        <!-- >>> CHANGE DESIGN TITLE HERE <<< -->
+        <p class="rotate-90 page-title">Guestbook</p>
+
+      </div>
+
+      <div class="actions">
+        <!-- [Design Action Button Section] (includes add button and html code of the modal) -->
+
+        <!-- [Spinning Wheel (Loading)] (logic can be found in main.js) <https://www.carbondesignsystem.com/components/loading/code> -->
+        <div class="bx--loading-overlay bx--loading-overlay--stop">
+          <div data-loading id="watsonLoading" class="bx--loading">
+            <svg class="bx--loading__svg" viewBox="-75 -75 150 150">            
+              <circle class="bx--loading__stroke" cx="0" cy="0" r="37.5" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- [Add Button] <https://www.carbondesignsystem.com/components/button/code> -->
+        <button class="bx--btn bx--btn--primary width-100 button-add" type="button" data-modal-target="#inputModal">
+
+            <!-- >>> CHANGE TEXT OF BUTTON HERE <<< -->
+            Add a new entry...
+
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M8.5 7.5V3h-1v4.5H3v1h4.5V13h1V8.5H13v-1z"></path>
+            </svg>
+        </button>
+
+        <!-- [Input Modal] (includes username and photo upload) <https://www.carbondesignsystem.com/components/modal/code#input-modal> -->
+        <div data-modal id="inputModal" class="bx--modal " role="dialog" aria-modal="true" aria-labelledby="inputModal-label" aria-describedby="inputModal-heading" tabindex="-1">
+          <div class="bx--modal-container">
+            <div class="bx--modal-header">
+
+              <!-- >>> CHANGE HEADINGS OF MODAL HERE <<< -->
+              <p class="bx--modal-header__label bx--type-delta" id="inputModal-label">Guestbook</p>
+              <p class="bx--modal-header__heading bx--type-beta" id="inputModal-heading">Add a new entry...</p>
+
+              <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" >
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--modal-close__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"></path></svg>
+              </button>
+            </div>
+          
+            <div class="bx--modal-content">
+              <div class="bx--form-item">
+
+                <!-- >>> CHANGE LABEL AND PLACEHOLDER OF USERNAME INPUT HERE <<< -->
+                <label for="userNameInput" class="bx--label">Your Name</label>
+                <input id="userNameInput" type="text" class="bx--text-input" placeholder="Max Mustermann" data-modal-primary-focus>
+
+              </div>
+
+              <!-- [Image Upload] <https://www.carbondesignsystem.com/components/file-uploader/code> -->
+              <div class="bx--form-item margin-top">
+
+                <!-- >>> CHANGE FIELD LABEL AND BUTTON LABEL HERE <<< -->
+                <label class="bx--label">Your Photo</label>
+                <div class="bx--file" data-file>
+                  <label for="photoUpload" class="bx--file-btn bx--btn bx--btn--primary" role="button" tabindex="0">Take photo</label>
+                  <input type="file" accept="image/*" class="bx--file-input" id="photoUpload" data-file-uploader data-target="[data-file-container]" />
+                  <div data-file-container id="fileContainer" class="bx--file-container">
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="bx--modal-footer">
+
+              <!-- >>> CHANGE MODAL BUTTON LABELS HERE <<< -->
+              <button class="bx--btn bx--btn--secondary" type="button" data-modal-close>Cancel</button>
+              <button onclick="onSave(event)" class="bx--btn bx--btn--primary" type="button" data-modal-close>Save</button>
+
+            </div>  
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- [Design Page Content] -->
+
+        <div id="cards">
+          <!-- [Guest Card Grid] (automatically filled by main.js using the API data) -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

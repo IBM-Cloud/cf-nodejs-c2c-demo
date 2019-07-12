@@ -1,0 +1,27 @@
+{
+  "name": "ibmcloud-nodejs-demo-watson",
+  "version": "0.0.1",
+  "description": "A demo application for IBM Cloud on CloudFoundry, using Node.js, Cloudant and Watson.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -e js,html,json,css server.js"
+  },
+  "author": "m-lukas",
+  "license": "ISC",
+  "dependencies": {
+    "@cloudant/cloudant": "^4.1.0",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "carbon-components": "^10.2.0",
+    "cfenv": "^1.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "sharp": "^0.22.1",
+    "uuidv4": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}

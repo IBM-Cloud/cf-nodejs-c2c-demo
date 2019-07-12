@@ -1,0 +1,5 @@
+---
+applications:
+ - name: ibmcloud-nodejs-demo
+   random-route: true
+   memory: 128M

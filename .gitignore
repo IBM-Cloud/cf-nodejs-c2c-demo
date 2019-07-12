@@ -1,0 +1,5 @@
+*/.env
+*/vcap-local.json
+*/node_modules
+*/.eslintrc.json
+*/.gitignore
