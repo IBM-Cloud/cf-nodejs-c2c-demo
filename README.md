@@ -21,11 +21,25 @@ This repository includes both microservices/Node.js applications, the 'main-serv
 
 ## Deployment
 
-### Service Setup
+### Prerequisites
 
-### Local Deployment
+- Install latest version of IBM Cloud CLI: https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started
+- If not present, create Account on IBM Cloud: https://cloud.ibm.com/registration
+- Login into your Cloud Foundry organization and space: https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started#step3-configure-idt-env
 
-### CloudFoundry Deployment
+### Main-Service
+
+#### Local Deployment
+
+#### CloudFoundry Deployment
+
+### Watson-Service
+
+#### Local Deployment
+
+#### CloudFoundry Deployment
+
+### Container-to-Container Networking
 
 ## License
 Apache 2.0. See [LICENSE.txt](LICENSE.txt)
