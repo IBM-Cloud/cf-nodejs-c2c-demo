@@ -6,7 +6,7 @@ This project is a demonstration for Node.js Microservices and Container-to-Conta
 
 ## Architecture
 
-![architecture](https://github.com/m-lukas/cf-nodejs-c2c-demo/blob/master/.docs/architecture.png)
+![architecture](.docs/architecture.png)
 
 1. The frontend/interface for the user is served by the 'main-service' (left Node.js application)
 2. Backend API calls to create a new guestbook entry and to retrieve entries and images
