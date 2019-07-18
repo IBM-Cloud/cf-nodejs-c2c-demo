@@ -26,10 +26,77 @@ This repository includes both microservices/Node.js applications, the 'main-serv
 - Install latest version of IBM Cloud CLI: https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started
 - If not present, create Account on IBM Cloud: https://cloud.ibm.com/registration
 - Login into your Cloud Foundry organization and space: https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started#step3-configure-idt-env
+- Latest version of GitHub: https://git-scm.com/downloads
+- Latest version of Node.js for running the server locally: https://nodejs.org/en/download/
+- code editior/IDE of your choice (VS CODE, Atom, Sublime...)
+
+### Local setup
+
+- open a terminal at the location of your choice
+- clone Github Project using `git clone https://github.com/m-lukas/cf-nodejs-c2c-demo.git`
+- use command `cd cf-nodejs-c2c-demo` to access the project folder
+- open the project in the code editior/IDE of your choice
 
 ### Main-Service
 
+- open your prefered browser
+- go to the compute section in the IBM Cloud catalog https://cloud.ibm.com/catalog?search=label:lite&category=compute (scroll down) > Section: CloudFoundry > click on SDK for Node.js™ = Create a CloudFoundry App
+- Enter app name - for this example "guestbook-main"
+- Hostname fills out automatically and can stay like this
+- choose Domain, Region/Location, Organisation and Space ... for Lite-Edition can stay on defaults: Domain: eu-gb.bluemix.net, Region: London, default org and space
+- Tags: add "guestbook" -> helps you to find your resources better
+- Choose: Pricing Plan ... Lite is enough -> select Memory: 64 or 128 MB
+- Click on "Create" (blue button, right bottom corner)
+- => CloudFoundry App has been created
+- (Redirect to the Getting Started page of the Application)
+- Wait until the app is started (status next to the application name)
+- App can be checked by clicking on Routes (top-right corner) and selecting the first route/url in there which ends on .mybluemix.net - afterwards go back to IBM Cloud
+- go again to the catalog but this time to the "Databases" category https://cloud.ibm.com/catalog?search=label:lite&category=databases, click on the product card "Cloudant"
+- type in a service name, for this example: guestbook
+- choose a region/location
+- add tag: "cloudant-database"
+- choose your prefered authentification method: recommended "Use only IAM" to log into Cloudant with your IBM Cloud credentials
+- choose your prefered pricing plan ... Lite plan is completely sufficent
+- in the resource list, under "Cloud Foundry Apps", click on the name of your previously created "guestbook-main" application -> alternatively you can also search for the name or filter for the "guestbook" tag in the table
+- in the side-bar, click on the item "Connections"
+- click on the button "Create connection"
+- in the appearing table, hover over your cloudant database "guestbook-database" and click "Connect" to configurate a connection between the main-service and the database
+- in the popup "Connect IAM-Enabled Service", select "Manager" as "Access Role for Connection" and "Auto Generate" as "Service ID for Connection", click on "Connect" to submit these settings
+- restage the app afterwards (click on "Restage in popup")
+
 #### Local Deployment
+
+- after the app is restaged, "guestbook-database" appears in the list as connection -> click the 3 horizontal dots in it
+- in the menu, click on "View credentials" and copy the displayed (json) code from the box within the popup (CTRL/CMD+C or using the button)
+- go to you code editor and open the folder "main-service"
+- rename the file "vcap-local.json.example" to "vcap-local.json" and paste the credentials code behind `service:`
+example:
+```
+{
+  "services": {
+    "cloudantNoSQLDB": [
+    {
+      ...
+    }
+  ]
+}
+}
+```
+- => application is ready to be tested
+- in your terminal, use the command `cd main-service` to access the service folder
+- use the command: `npm install` to install all dependencies
+- start the server with `npm run dev`
+- => expected output:
+```
+    ...
+    Loaded local VCAP { services: { cloudantNoSQLDB: [ [Object] ] } }
+    Successfully initialized cloudant client!
+    [ENV] Server Port: 
+    [ENV] Image Base Path: 
+    [ENV] Watson Microservice: 
+    Listening on port: 5000
+```
+- Guestbook is available under: http://localhost:5000/ 
 
 #### CloudFoundry Deployment
 
