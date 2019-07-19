@@ -1,5 +1,5 @@
 ---
 applications:
- - name: ibmcloud-nodejs-demo
+ - name: guestbook-main
    random-route: true
    memory: 128M

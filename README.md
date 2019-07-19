@@ -45,7 +45,7 @@ This repository includes both microservices/Node.js applications, the 'main-serv
 - Hostname fills out automatically and can stay like this
 - choose Domain, Region/Location, Organisation and Space ... for Lite-Edition can stay on defaults: Domain: eu-gb.bluemix.net, Region: London, default org and space
 - Tags: add "guestbook" -> helps you to find your resources better
-- Choose: Pricing Plan ... Lite is enough -> select Memory: 64 or 128 MB
+- Choose: Pricing Plan ... Lite is enough -> select Memory: 64MB or 128MB
 - Click on "Create" (blue button, right bottom corner)
 - => CloudFoundry App has been created
 - (Redirect to the Getting Started page of the Application)
@@ -55,7 +55,7 @@ This repository includes both microservices/Node.js applications, the 'main-serv
 - type in a service name, for this example: guestbook
 - choose a region/location
 - add tag: "cloudant-database"
-- choose your prefered authentification method: recommended "Use only IAM" to log into Cloudant with your IBM Cloud credentials
+- select the authentification method: "Use both legacy credentials and IAM" to log into Cloudant using HTTP basic auth
 - choose your prefered pricing plan ... Lite plan is completely sufficent
 - in the resource list, under "Cloud Foundry Apps", click on the name of your previously created "guestbook-main" application -> alternatively you can also search for the name or filter for the "guestbook" tag in the table
 - in the side-bar, click on the item "Connections"
@@ -64,12 +64,12 @@ This repository includes both microservices/Node.js applications, the 'main-serv
 - in the popup "Connect IAM-Enabled Service", select "Manager" as "Access Role for Connection" and "Auto Generate" as "Service ID for Connection", click on "Connect" to submit these settings
 - restage the app afterwards (click on "Restage in popup")
 
-#### Local Deployment
+#### Local Deployment ()
 
 - after the app is restaged, "guestbook-database" appears in the list as connection -> click the 3 horizontal dots in it
 - in the menu, click on "View credentials" and copy the displayed (json) code from the box within the popup (CTRL/CMD+C or using the button)
 - go to you code editor and open the folder "main-service"
-- rename the file "vcap-local.json.example" to "vcap-local.json" and paste the credentials code behind `service:`
+- rename the file "vcap-local.json.example" to "vcap-local.json" and paste the credentials code behind `"services":`
 example:
 ```
 {
@@ -83,7 +83,7 @@ example:
 }
 ```
 - => application is ready to be tested
-- in your terminal, use the command `cd main-service` to access the service folder
+- in your terminal, use the command `cd main-service` to access the main application folder
 - use the command: `npm install` to install all dependencies
 - start the server with `npm run dev`
 - => expected output:
@@ -96,9 +96,38 @@ example:
     [ENV] Watson Microservice: 
     Listening on port: 5000
 ```
-- Guestbook is available under: http://localhost:5000/ 
+- Guestbook is available under: http://localhost:5000/
+- => Listing and adding of new guests should already work
+- (on adding a new entry, it will show an error message in the terminal due to the missing second application. This error message can be ignored)
 
 #### CloudFoundry Deployment
+
+- in your terminal, use the command `cd main-service` to access the main application folder
+- in your terminal, navigate to the main application folder using the command `cd main-service` if you are in the root project folder or stay in the same folder if you did the local deployment before
+- log into the ibmcloud CLI using: `ibmcloud login -sso`
+- (if the region in the table doesn't accord you previously selected region for the application, use the same command with an additional flag: `ibmcloud login -sso -r <region>`)
+- following use the command `ibmcloud target --cf` to target your CloudFoundry Org and Space
+- (IF you did NOT use 'guestbook-main' as name for the application, please remember changing the name in the `manifest.yml` file)
+- use `ibmcloud cf push` to push the application the the cloud
+- if it was successful, it should give a output similar to this:
+```
+Waiting for app to start...
+
+name:              guestbook-main
+requested state:   started
+routes:            <route>
+last uploaded:     Fri 19 Jul 11:12:44 CEST 2019
+stack:             cflinuxfs3
+buildpacks:        SDK for Node.js(TM) (ibm-node.js-6.17.1, buildpack-v3.27-20190530-0937)
+
+type:            web
+instances:       1/1
+memory usage:    128M
+start command:   ./vendor/initial_startup.rb
+     state     since                  cpu    memory          disk          details
+#0   running   2019-07-19T09:13:01Z   0.5%   28.7M of 128M   63.5M of 1G
+```
+- from the list, you can copy the route and open it in your browser to see the Guestbook application
 
 ### Watson-Service
 
