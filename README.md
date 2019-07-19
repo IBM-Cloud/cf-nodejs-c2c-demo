@@ -131,7 +131,53 @@ start command:   ./vendor/initial_startup.rb
 
 ### Watson-Service
 
+- in your browser, open the link: https://cloud.ibm.com/catalog?search=label:lite&category=compute to get to the Compute category in the IBM Cloud catalog
+- go to the Cloud Foundry section and create a "SDK for Node.js™" application by clicking on the card
+- this time, use "guestbook-watson" as App name, use the default domain ending on ".mybluemix.net", set your prefered region/location (for Lite: eu-gb), add tag: "guestbook" and select you pricing plan and memory: Free and 64MB is enough
+- Click on "Create" (blue button, right bottom corner)
+- => CloudFoundry App has been created
+- (Redirect to the Getting Started page of the Application)
+- Wait until the app is started (status next to the application name)
+- App can be checked by clicking on Routes (top-right corner) and selecting the first route/url in there which ends on .mybluemix.net - afterwards go back to IBM Cloud
+- go again to the catalog but this time to the "AI" category https://cloud.ibm.com/catalog?search=label:lite&category=ai, click on the product card "Visual Recognition"
+- type in the Service name: "guestbook-visual", set the tag "guestbook", and select the pricing plan: "Lite" should be enough
+- subsequently click on "Create"
+- (redirect to the "Getting Started" page of the visial regocognition service)
+- in the side-bar, click on the item "Connections"
+- click on the button: "Create connection"
+- in the filter of the table, select the region/location of your previously created "guestbook-watson" Cloud Foundry application
+- in the table, hover over the "guestbook-watson" item and click on "Connect"
+- Access Role fo Connection: "Manager", Service ID for Connection: empty, other fields: empty
+- Click on "Connect & restage app" to create the connection configuration
+- agree the restaging of the app with a click on "Restage"
+- after the app is restarted, click on the "guestbook-watson" application in the table to go to the application dashboard
+
 #### Local Deployment
+
+(step is only possible with local deployment of main-service)
+
+- in the sidebar- click on the item "Connections"
+- in the table you will the the "guestbook-visual" service, as binded connection
+- subsequently, click on the 3 horizontal dots (menu) in the table row and click on "View credentials" and copy the credentials JSON
+- in your code-editor go into the directory "watson-service" and open the file "vcap-local.json.example"
+- behind "services": paste the credentials JSON
+- example:
+```
+{
+  "services": {
+    "{"watson_vision_combined": [
+    {
+      ...
+    }
+  ]
+}
+}
+```
+- switch to a new terminal tab, go into the folder, run `npm install` and following: `npm run dev`
+- this will start your local application
+- => in the web app (localhost) - the appluication should be run completely (tags)
+
+(WATSON SERVICE NEEDS CLOUDANT URL!)
 
 #### CloudFoundry Deployment
 
