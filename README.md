@@ -1,4 +1,4 @@
-# Node.js IBM CloudFoundry Demo
+# Node.js IBM Cloud Foundry Demo
 
 ## Description
 
@@ -32,46 +32,66 @@ This repository includes both microservices/Node.js applications, the 'main-serv
 
 ### Local setup
 
-- open a terminal at the location of your choice
-- clone Github Project using `git clone https://github.com/m-lukas/cf-nodejs-c2c-demo.git`
-- use command `cd cf-nodejs-c2c-demo` to access the project folder
-- open the project in the code editior/IDE of your choice
+1. open a terminal at the location of your choice
+2. clone Github Project using `git clone https://github.com/m-lukas/cf-nodejs-c2c-demo.git`
+3. use command `cd cf-nodejs-c2c-demo` to access the project folder
+4. open the project in the code editior/IDE of your choice
 
-### Main-Service
+### Main-App
 
-- open your prefered browser
-- go to the compute section in the IBM Cloud catalog https://cloud.ibm.com/catalog?search=label:lite&category=compute (scroll down) > Section: CloudFoundry > click on SDK for Node.js™ = Create a CloudFoundry App
-- Enter app name - for this example "guestbook-main"
-- Hostname fills out automatically and can stay like this
-- choose Domain, Region/Location, Organisation and Space ... for Lite-Edition can stay on defaults: Domain: eu-gb.bluemix.net, Region: London, default org and space
-- Tags: add "guestbook" -> helps you to find your resources better
-- Choose: Pricing Plan ... Lite is enough -> select Memory: 64MB or 128MB
-- Click on "Create" (blue button, right bottom corner)
-- => CloudFoundry App has been created
-- (Redirect to the Getting Started page of the Application)
-- Wait until the app is started (status next to the application name)
-- App can be checked by clicking on Routes (top-right corner) and selecting the first route/url in there which ends on .mybluemix.net - afterwards go back to IBM Cloud
-- go again to the catalog but this time to the "Databases" category https://cloud.ibm.com/catalog?search=label:lite&category=databases, click on the product card "Cloudant"
-- type in a service name, for this example: guestbook
-- choose a region/location
-- add tag: "cloudant-database"
-- select the authentification method: "Use both legacy credentials and IAM" to log into Cloudant using HTTP basic auth
-- choose your prefered pricing plan ... Lite plan is completely sufficent
-- in the resource list, under "Cloud Foundry Apps", click on the name of your previously created "guestbook-main" application -> alternatively you can also search for the name or filter for the "guestbook" tag in the table
-- in the side-bar, click on the item "Connections"
-- click on the button "Create connection"
-- in the appearing table, hover over your cloudant database "guestbook-database" and click "Connect" to configurate a connection between the main-service and the database
-- in the popup "Connect IAM-Enabled Service", select "Manager" as "Access Role for Connection" and "Auto Generate" as "Service ID for Connection", click on "Connect" to submit these settings
-- restage the app afterwards (click on "Restage in popup")
+1. First of all, go to the "Compute" section in the IBM Cloud catalog by clicking on the navigation item "Catalog" on the IBM Cloud Dashboard and subsequently on the menu item "Compute" or by opening the following link: https://cloud.ibm.com/catalog?search=label:lite&category=compute
+2. In the list, search for the "SDK for Node.js" product card and click on it in order to create a new Cloud Foundry (CF) App based on the Node.js buildpack.
+3. Fill out the form for the app creation:
 
-#### Local Deployment ()
+  - *App name* - To keep it simple, we will use the name "guestbook-main" for this application. However you are free to use any other name but consider to change the name in all subsequent steps.
+  - *Hostpath* - Leave it on the default value.
+  - *Domain* -  Leave it on the default value.
+  - *Region/Location*, *Organization* and *Space* - In the Lite version, use the region London for deployment. If organization and space fields don't have any values, you have to create a new Cloud Foundry (CF) organization and space before: https://cloud.ibm.com/docs/account?topic=account-orgsspacesusers
+  - *Tags* - Add the tag "guestbook" to find your resources more easily.
+  - *Pricing Plans* - Select your prefered pricing plan and memory. The Lite plan and 128MB of memory are sufficient.
 
-- after the app is restaged, "guestbook-database" appears in the list as connection -> click the 3 horizontal dots in it
-- in the menu, click on "View credentials" and copy the displayed (json) code from the box within the popup (CTRL/CMD+C or using the button)
-- go to you code editor and open the folder "main-service"
-- rename the file "vcap-local.json.example" to "vcap-local.json" and paste the credentials code behind `"services":`
-example:
-```
+4. Following, click on the button "Create" to submit the form and create the app.
+
+- You have been redirected to an application overview and the app was created. Please wait until the app is started/awake. The status can be found in the header, near to the application name.
+- Additionally, by clicking on the "Routes" button and subsequently, on the public URL in the list, you can check the status of the app directly. Afterwards, go back to the IBM Cloud website.
+
+5. Go again to the "Catalog" by clicking on the same named navigation item but this time go to the "Databases" section or open the following link: https://cloud.ibm.com/catalog?search=label:lite&category=databases
+6. Search for the product card "Cloudant" and click on it, to create a new Cloudant NoSQL database.
+7. Fill out the form for the database creation:
+
+- *Service name* - To keep it simple, we will use the name "guestbook-database" for this service but you can use any other name for it as well.
+- *Region/Location* - To reduce latency, use the same region/location as for the CF application.
+- *Tags* - Add the tag "guestbook" to find your resources more easily.
+- *Authentication Methods* - Select the authentification method: "Use both legacy credentials and IAM" to enable HTTP authentification which is needed to send the requests to the database.
+- *Pricing Plans* - Select your prefered pricing plan and memory. The Lite plan is sufficient for our needs.
+
+8. Click on the button "Create" to submit the form and create the database.
+
+- You're redirected to the service overview.
+
+9. In the side bar, click on the item "Connections".
+10. Subsequently on the connections page, click the button "Create connection" to create a new connection configuration between the application and the service.
+11. After selecting the region/location of the previously created application in the filter of the table, you will see the application "guestbook-main" as entry in the table.
+12. Hover over the "guestbook-main" row to find the "Create" button and click on it.
+13. In the form for creating the connection, you can stay with the default values. The "Access Role" should be "Manager". Following, click on "Connect & restage app".
+14. You have to confirm the restaging of the "guestbook-main" application in another popup.
+15. In the table, under "Connected Applications", you will find "guestbook-main" as entry. Click on the "guestbook-main" row to go to the application dashboard.
+
+#### Local Testing (optional)
+
+Local Testing is only necessary if you consider to modify the application code. In this case, you can very quickly restart the application and debug it more easily. In opposite to the second application of our example, the main-app ("guestbook-main") does not require the second application to work. If the second application ("guestbook-watson") is not available, it won't analyse the image to retrieve the tags but the rest of the guestbook does not depend on it. Please notice that the terminal will display a HTTP error (status 404) in this case which can be ignored.
+
+1. On the application dashboard of the "guestbook-main" CF app, click on "Connections" in the side bar.
+2. In the table, you will see the connection to the database "guestbook-database" as entry. In its row, click on the 3 horizontal dots to open the menu.
+3. In the menu, click on "View credentials" to open a popup with the credentials for this connection.
+4. Copy the displayed code block either by clicking on the small copy icon or by selecting the code and copying it by using CTLR/CMD + C.
+5. Open your code-editor now and go into the subdirectory "main-app".
+6. In it, you will find a file called `vcap-local.json.example`. Rename this file to `vcap-local.json` and paste the code behind `"services:"`.
+
+- vcap-local.json is the local configuration for the connection to the database. It is automatically parsed on the start of the server and contains all connection information and credentials.
+- After pasting, the file should look similar like this example:
+
+```json
 {
   "services": {
     "cloudantNoSQLDB": [
@@ -82,12 +102,16 @@ example:
 }
 }
 ```
-- => application is ready to be tested
-- in your terminal, use the command `cd main-service` to access the main application folder
-- use the command: `npm install` to install all dependencies
-- start the server with `npm run dev`
-- => expected output:
-```
+
+- Afterwards, the application is ready to be tested. 🎉
+
+7. In your terminal, navigate into the folder "main-app" by using the command: `cd <Path to folder>`
+8. Use the command: `npm install` to install all dependencies of the application locally. If Node.js is not installed, install the latest version on your machine (see Prerequisites).
+9. Following, start the server using: `npm run dev`. This opens the server using the package nodemon which reloads the server on every file change.
+
+- The expected output of this command looks something like this:
+
+```shell
     ...
     Loaded local VCAP { services: { cloudantNoSQLDB: [ [Object] ] } }
     Successfully initialized cloudant client!
@@ -96,26 +120,30 @@ example:
     [ENV] Watson Microservice: 
     Listening on port: 5000
 ```
-- Guestbook is available under: http://localhost:5000/
-- => Listing and adding of new guests should already work
-- (on adding a new entry, it will show an error message in the terminal due to the missing second application. This error message can be ignored)
 
-#### CloudFoundry Deployment
+- The app should be available on your local browser using the URL: http://localhost:5000/
 
-- in your terminal, use the command `cd main-service` to access the main application folder
-- in your terminal, navigate to the main application folder using the command `cd main-service` if you are in the root project folder or stay in the same folder if you did the local deployment before
-- log into the ibmcloud CLI using: `ibmcloud login -sso`
-- (if the region in the table doesn't accord you previously selected region for the application, use the same command with an additional flag: `ibmcloud login -sso -r <region>`)
-- following use the command `ibmcloud target --cf` to target your CloudFoundry Org and Space
-- (IF you did NOT use 'guestbook-main' as name for the application, please remember changing the name in the `manifest.yml` file)
-- use `ibmcloud cf push` to push the application the the cloud
-- if it was successful, it should give a output similar to this:
-```
+#### Cloud Foundry Deployment (required)
+
+1. Open your code-editor now and go into the subdirectory "main-app".
+2. In the file `manifest.yml`, check the name field and if its not set already, set the value to your application name (for example: "guestbook-main").
+3. In your terminal, navigate into the folder "main-app" by using the command: `cd <Path to folder>`
+4. Push the application to IBM Cloud using the CLI (installation see Prerequisites):
+
+- Use the command `ibmcloud login -sso` to log into your IBM Cloud account using Single-Sign-On.
+
+> IF the region in the output table does NOT accord your previously selected region/location for the "guestbook-main" application, use the command `ibmcloud login -sso -r <region>` to change it (for example: `ibmcloud login -sso -r eu-gb`) for London.
+
+- Afterwards, target your CF organization and space using `ibmcloud target --cf`. This will complete your local configuration for pushing to Cloud Foundry.
+- With the command `ibmcloud cf push` you can push (upload and deploy) your application to IBM Cloud Foundry now.
+- After a successful push, you will see an output similar to this:
+
+```shell
 Waiting for app to start...
 
 name:              guestbook-main
 requested state:   started
-routes:            <route>
+routes:            <ROUTE>
 last uploaded:     Fri 19 Jul 11:12:44 CEST 2019
 stack:             cflinuxfs3
 buildpacks:        SDK for Node.js(TM) (ibm-node.js-6.17.1, buildpack-v3.27-20190530-0937)
@@ -127,30 +155,54 @@ start command:   ./vendor/initial_startup.rb
      state     since                  cpu    memory          disk          details
 #0   running   2019-07-19T09:13:01Z   0.5%   28.7M of 128M   63.5M of 1G
 ```
-- from the list, you can copy the route and open it in your browser to see the Guestbook application
 
-### Watson-Service
+- You can copy the `route` value from the output now and open it in the browser to see the deployed Guestbook.
 
-- in your browser, open the link: https://cloud.ibm.com/catalog?search=label:lite&category=compute to get to the Compute category in the IBM Cloud catalog
-- go to the Cloud Foundry section and create a "SDK for Node.js™" application by clicking on the card
-- this time, use "guestbook-watson" as App name, use the default domain ending on ".mybluemix.net", set your prefered region/location (for Lite: eu-gb), add tag: "guestbook" and select you pricing plan and memory: Free and 64MB is enough
-- Click on "Create" (blue button, right bottom corner)
-- => CloudFoundry App has been created
-- (Redirect to the Getting Started page of the Application)
-- Wait until the app is started (status next to the application name)
-- App can be checked by clicking on Routes (top-right corner) and selecting the first route/url in there which ends on .mybluemix.net - afterwards go back to IBM Cloud
-- go again to the catalog but this time to the "AI" category https://cloud.ibm.com/catalog?search=label:lite&category=ai, click on the product card "Visual Recognition"
-- type in the Service name: "guestbook-visual", set the tag "guestbook", and select the pricing plan: "Lite" should be enough
-- subsequently click on "Create"
-- (redirect to the "Getting Started" page of the visial regocognition service)
-- in the side-bar, click on the item "Connections"
-- click on the button: "Create connection"
-- in the filter of the table, select the region/location of your previously created "guestbook-watson" Cloud Foundry application
-- in the table, hover over the "guestbook-watson" item and click on "Connect"
-- Access Role fo Connection: "Manager", Service ID for Connection: empty, other fields: empty
-- Click on "Connect & restage app" to create the connection configuration
-- agree the restaging of the app with a click on "Restage"
-- after the app is restarted, click on the "guestbook-watson" application in the table to go to the application dashboard
+### Watson-App
+
+1. In your browser, go again to the IBM Cloud dashboard (https://cloud.ibm.com/).
+2. Similar to the procedure for the first application, go to the "Compute" section in the IBM Cloud catalog by clicking on the navigation item "Catalog" and subsequently on the menu item "Compute" or by opening the following link: https://cloud.ibm.com/catalog?search=label:lite&category=compute
+3. In the list, search for the "SDK for Node.js" product card and click on it in order to create a new Cloud Foundry (CF) App based on the Node.js buildpack.
+4. Fill out the form for the app creation:
+
+  - *App name* - To keep it simple, we will use the name "guestbook-watson" for this application. However you are free to use any other name but consider to change the name in all subsequent steps.
+  - *Hostpath* - Leave it on the default value.
+  - *Domain* -  Leave it on the default value.
+  - *Region/Location*, *Organization* and *Space* - In the Lite version, use the region London for deployment. If organization and space fields don't have any values, you have to create a new Cloud Foundry (CF) organization and space before: https://cloud.ibm.com/docs/account?topic=account-orgsspacesusers
+  - *Tags* - Add the tag "guestbook" to find your resources more easily.
+  - *Pricing Plans* - Select your prefered pricing plan and memory. The Lite plan and 128MB of memory are sufficient.
+
+5. Following, click on the button "Create" to submit the form and create the app.
+
+- You have been redirected to an application overview and the app was created. Please wait until the app is started/awake. The status can be found in the header, near to the application name.
+- Additionally, by clicking on the "Routes" button and subsequently, on the public URL in the list, you can check the status of the app directly. Afterwards, go back to the IBM Cloud website.
+
+6. Go again to the "Catalog" by clicking on the same named navigation item but this time go to the "AI" section or open the following link: https://cloud.ibm.com/catalog?search=label:lite&category=ai
+7. Search for the product card "Visual Regocnition" and click on it, to create new API credentials for the IBM Watson API.
+8. Fill out the form for the service creation:
+
+- *Service name* - To keep it simple, we will use the name "guestbook-visual" for this service but you can use any other name for it as well.
+- *Tags* - Add the tag "guestbook" to find your resources more easily.
+- *Pricing Plans* - Select your prefered pricing plan and memory. The Lite plan is sufficient for our needs.
+
+8. Click on the button "Create" to submit the form and create the database.
+
+- You're redirected to the service overview.
+
+9. In the side bar, click on the item "Connections".
+10. Subsequently on the connections page, click the button "Create connection" to create a new connection configuration between the application and the service.
+11. After selecting the region/location of the previously created application in the filter of the table, you will see the application "guestbook-watson" as entry in the table.
+12. Hover over the "guestbook-watson" row to find the "Create" button and click on it.
+13. In the form for creating the connection, you can stay with the default values. The "Access Role" should be "Manager". Following, click on "Connect & restage app".
+14. You have to confirm the restaging of the "guestbook-watson" application in another popup.
+15. In the table, under "Connected Applications", you will find "guestbook-watson" as entry. Click on the "guestbook-watson" row to go to the application dashboard.
+
+#### Local Testing (Main-App + Watson-App) (optional)
+
+Local Testing is only necessary if you consider to modify the application code. Testing the second application is more complicated than testing the first one. The Watson API requires a public URL of the image which it is going to analyse. While Cloudant lets you save files in a integrated Blob-store as well, it does require authentification for accessing the uploaded file via a public URL. That's why, the main-app provides a public URL and pipes the file-stream from Cloudant. However, this requires a deployed version of the main-app and some configuration which is discribed in this section.
+
+1. Make sure that you deployed the "Main-App" to Cloud Foundry (see Main-App > Cloud Foundry Deployment)
+2. Go to the IBM Cloud Dashboard (https://cloud.ibm.com/)
 
 #### Local Deployment
 

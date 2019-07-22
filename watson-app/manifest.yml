@@ -1,5 +1,5 @@
 ---
 applications:
- - name: ibmcloud-nodejs-demo-watson
+ - name: guestbook-watson
    random-route: true
    memory: 128M
