@@ -109,11 +109,21 @@ router.post('/', (req, resp) => {
         let watsonImageUrl = process.env.WATSON_IMAGE_URL || "";
         let watsonServiceUrl = process.env.WATSON_SERVICE_URL || "http://localhost:3000"
 
+        let imageRoutePath = "/api/attachment"
+        if(watsonImageUrl.endsWith("/")){
+            imageRoutePath = "api/attachment"
+        }
+
         //prepares the link to the image using document id and file name
-        let imageUrl = `${watsonImageUrl}/api/attachment/${doc.id}/${doc.fileName}`;
+        let imageUrl = `${watsonImageUrl}${imageRoutePath}/${doc.id}/${doc.fileName}`;
+
+        let watsonRoutePath = "/api/image"
+        if(watsonServiceUrl.endsWith("/")){
+            watsonRoutePath = "api/image"
+        }
 
         //sends request to service 2 with the imageUrl as payload
-        return axios.post(`${watsonServiceUrl}/api/image`, {imageUrl: imageUrl});
+        return axios.post(`${watsonServiceUrl}${watsonRoutePath}`, {imageUrl: imageUrl});
 
     //------------------------------------------------------------------------------
     // Copy tags and additional tagData to the return object, get the complete document

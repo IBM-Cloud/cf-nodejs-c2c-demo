@@ -31,6 +31,9 @@ app.use(cors({origin: '*'})); //Allow cross-origin (for requests from outside th
 app.use('/api', healthRoute);
 app.use('/api/image', imageRoutes);
 
+// Overview about the enviroment vaiables
+console.log("[ENV] Server Port: " + (process.env.PORT || "3000"));
+
 //------------------------------------------------------------------------------
 // Start http server
 //------------------------------------------------------------------------------
