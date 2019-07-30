@@ -39,7 +39,7 @@ app.use('/api/attachment', attachmentRoutes);
 app.use(express.static(__dirname + '/views'));
 
 // Overview about the enviroment vaiables
-console.log("[ENV] Server Port: " + (process.env.PORT || "3000"));
+console.log("[ENV] Server Port: " + (process.env.PORT || "5000"));
 console.log("[ENV] Image Base Path: " + (process.env.WATSON_IMAGE_URL || ""));
 console.log("[ENV] Watson Microservice: " + (process.env.WATSON_SERVICE_URL || "http://localhost:3000"));
 
