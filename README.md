@@ -35,6 +35,9 @@ This project is a demonstration of Node.js Microservices and Container-to-Contai
 
 This repository includes both microservices/Node.js applications, the `main-app` and the `watson-app` which are saved in the same called sub-directories. Hereby, main-app is responsible for the basic functionality of the guestbook (HTML, create, list, database connection) while watson-app is optional and handles the connection with the Watson Visual Recognition API and their results. Both applications are full Node.js REST APIs and their root folders include a README file with more information about their functionality.
 
+- [Detailed Information about Main-App and Troubleshooting](main-app/README.md)
+- [Detailed Information about Watson-App](watson-app/README.md)
+
 ## Deployment
 
 ### Prerequisites
