@@ -323,7 +323,7 @@ This step can only be done after "guestbook-main" and "guestbook-watson" running
 6. Afterwards, save your changes by clicking on "Save". You might have to confirm in a subsequent popup the deletion of the route.
 7. Now, go again to the dashboard of "guestbook-main". (For example by opening [http://cloud.ibm.com/resources?groups=cf-application](http://cloud.ibm.com/resources?groups=cf-application) and clicking on the application name)
 8. In the side-bar, click on "Runtime" and subsequently select "Environment variables" like in the Local Deployment of Watson-App.
-9. Change the value of `WATSON_SERVICE_URL` to the recently created internal route (ending on `apps.intenal`) with the port 8080. Please make sure to not forget the `http://` in the beginning. Example: `http://guestbook-watson-xyz.apps.internal:8080`
+9. Change the value of `WATSON_SERVICE_URL` to the recently created internal route (ending on `apps.intenal`) with the port `:8080`. Please make sure to not forget the `http://` in the beginning. Example: `http://guestbook-watson-xyz.apps.internal:8080`
 
 > You can test the application now again but you will notice that the tag analysis on adding a guestbook entry won't work. The reason therefor is that we didn't add a policy for the communication between "guestbook-main" and "guestbook-watson" yet. By removing the public route, "guestbook-watson" only accepts internal traffic from apps which have to be configurated first.
 
