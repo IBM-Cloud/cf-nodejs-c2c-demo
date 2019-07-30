@@ -4,6 +4,22 @@
 
 This project is a demonstration of Node.js Microservices and Container-to-Container networking on IBM Cloud Foundry. It involves two distinct microservices in combination with a Cloudant NoSQL database and the Watson Visual Recognition API which provide a simple 'Guestbook' functionality to the user. To demonstrate the concept of Container-to-Container networking, the second microservice which connects to the Watson API is not required for the basic functionality of the application (add a guest, show all guests) and can be added separately afterwards. This helps to show that both microservices/CF applications communicate directly with each other and that the second service only needs an internal route due to the configurated networking policy.
 
+## Table of Contents
+
+- [Architecture](#architecture)
+- [Repository](#repository)
+- [Deployment](#deployment)
+  - [Prerequisites](#prerequisites)
+  - [Local Setup](#local-setup)
+  - [Main-App](#main-app)
+    - [Local Testing (Main-App) (optional)](#local-testing-main-app-optional)
+    - [Cloud Foundry Deployment (Main-App) (required)](#cloud-foundry-deployment-main-app-required)
+  - [Watson-App](#watson-app)
+    - [Local Testing (Main-App + Watson-App) (optional)](#local-testing-main-app--watson-app-optional)
+    - [Cloud Foundry Deployment (Watson-App) (required)](#cloud-foundry-deployment-watson-app-required)
+  - [Container-to-Container Networking](#container-to-container-networking)
+- [License](#license)
+ 
 ## Architecture
 
 ![architecture](.docs/architecture.png)
@@ -15,7 +31,7 @@ This project is a demonstration of Node.js Microservices and Container-to-Contai
 5. Use Waston Visual Recognition API to analyse the image using the provided image URL and create tags from this data
 6. Retrieve the image stream from the Cloudant Blob store by using the previously (in step 3) created URL
 
-## Contents
+## Repository
 
 This repository includes both microservices/Node.js applications, the `main-app` and the `watson-app` which are saved in the same called sub-directories. Hereby, main-app is responsible for the basic functionality of the guestbook (HTML, create, list, database connection) while watson-app is optional and handles the connection with the Watson Visual Recognition API and their results. Both applications are full Node.js REST APIs and their root folders include a README file with more information about their functionality.
 
@@ -30,7 +46,7 @@ This repository includes both microservices/Node.js applications, the `main-app`
 - The latest version of Node.js for running the server locally: [Node.js Download Page](https://nodejs.org/en/download/)
 - code editor/IDE of your choice (VS CODE, Atom, Sublime...)
 
-### Local setup
+### Local Setup
 
 1. First, open a terminal in a directory of your choice on your local computer.
 2. Clone this Github Project by using the command: `git clone https://github.com/m-lukas/cf-nodejs-c2c-demo.git`.
@@ -77,7 +93,7 @@ This repository includes both microservices/Node.js applications, the `main-app`
 14. You might have to confirm the restaging of the "guestbook-main" application in another popup.
 15. In the table, under "Connected Applications", you will find "guestbook-main" as an entry. Click on the "guestbook-main" row to go to the application dashboard.
 
-#### Local Testing (optional)
+#### Local Testing (Main-App) (optional)
 
 Local Testing is only necessary if you consider modifying the application code. In this case, you can very quickly restart the application to debug it more easily. In opposite to the second application of our example, the main-app ("guestbook-main") does not require the second application to work. If the second application ("guestbook-watson") is not available, it won't analyse the image to retrieve the tags but the remaining functionality of Guestbook does not depend on it. Please notice that the terminal will display an HTTP error (status 404) in the case that the second application is missing which can be ignored.
 
@@ -123,7 +139,7 @@ Local Testing is only necessary if you consider modifying the application code. 
 
 - The app should be available on your local browser using the URL: [http://localhost:5000/](http://localhost:5000/)
 
-#### Cloud Foundry Deployment (required)
+#### Cloud Foundry Deployment (Main-App) (required)
 
 1. Open your code-editor now and go into the subdirectory "main-app".
 2. In the file `manifest.yml`, check if the `name` field matches your chosen App name (for example `guestbook-main`). Change the value if you choose another App name!
@@ -131,7 +147,7 @@ Local Testing is only necessary if you consider modifying the application code. 
 4. Push the application to IBM Cloud using the CLI (installation see Prerequisites):
 
 ---
-**Cloud Foundry Login (can be skipped if you are already logged in with the CLI)**
+*Cloud Foundry Login (can be skipyed if you are already logged in with the CLI)
 
 - Use the command `ibmcloud login -sso` to log into your IBM Cloud account using Single-Sign-On.
 - **IF** the region in the output table does **NOT** accord your previously selected region/location for the "guestbook-main" application, use the command `ibmcloud login -sso -r <region>` to change it (for example: `ibmcloud login -sso -r eu-gb`) for London.
@@ -257,7 +273,7 @@ _Troubleshooting (if the applications don't work properly):_
 - make sure the environmental variables in main-app are set. When starting main-app locally, you will see the set environmental variables in the start output with the prefix (`[ENV]`)
 - if you have changed the ports manually by editing the code or setting the PORT env variable, please make sure to change this at all occurrences in code
 
-#### CloudFoundry Deployment
+#### Cloud Foundry Deployment (Watson-App) (required)
 
 1. Open your code-editor now and go into the subdirectory "watson-app".
 2. In the file `manifest.yml`, check if the `name` field matches your chosen App name (for example `guestbook-watson`). Change the value if you choose another App name!
@@ -265,7 +281,7 @@ _Troubleshooting (if the applications don't work properly):_
 4. Push the application to IBM Cloud using the CLI (installation see Prerequisites):
 
 ---
-**Cloud Foundry Login (can be skipped if you are already logged in with the CLI)**
+*Cloud Foundry Login (can be skipped if you are already logged in with the CLI)*
 
 - Use the command `ibmcloud login -sso` to log into your IBM Cloud account using Single-Sign-On.
 - **IF** the region in the output table does **NOT** accord your previously selected region/location for the "guestbook-watson" application, use the command `ibmcloud login -sso -r <region>` to change it (for example: `ibmcloud login -sso -r eu-gb`) for London.
