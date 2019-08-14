@@ -1,6 +1,6 @@
 :root{
-    /* >>> CHANGE BACKGROUNDCOLOR OF HEADER HERE <<< */
-    --header-color: #f3f3f3;
+    /* >>> CHANGE BACKGROUNDCOLOR OF HEADER AND FOOTER HERE <<< */
+    --layout-color: #f3f3f3;
 }
 
 html, body {
@@ -31,7 +31,7 @@ html, body {
 .header-background {
     height: 100%;
     width: 80%;
-    background-color: var(--header-color);
+    background-color: var(--layout-color);
 }
 
 /* (Flexbox with centered items) */
@@ -43,7 +43,7 @@ html, body {
 
 /* Parent Container of Logo */
 .logo-wrapper {
-    height: 150px;
+    height: 120%;
     width: 300px;
 }
 
@@ -83,6 +83,7 @@ html, body {
 /* Content Section */
 .content {
     padding: 10px;
+    flex-grow: 1;
     overflow-y: auto;
 }
 
@@ -131,4 +132,20 @@ html, body {
 /* (remove the left margin on the first tag of each card to align it with the second line) */
 .bx--tag:first-child{
     margin-left: 0;
+}
+
+.footer {
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    bottom: 5px;
+    right: 5px;
+    max-width: 100% !important;
+}
+
+.bx--inline-notification__text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
