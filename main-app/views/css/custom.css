@@ -1,6 +1,6 @@
 :root{
-    /* >>> CHANGE BACKGROUNDCOLOR OF HEADER HERE <<< */
-    --header-color: #f3f3f3;
+    /* >>> CHANGE BACKGROUNDCOLOR OF HEADER AND FOOTER HERE <<< */
+    --layout-color: #f3f3f3;
 }
 
 html, body {
@@ -31,7 +31,7 @@ html, body {
 .header-background {
     height: 100%;
     width: 80%;
-    background-color: var(--header-color);
+    background-color: var(--layout-color);
 }
 
 /* (Flexbox with centered items) */
@@ -83,6 +83,7 @@ html, body {
 /* Content Section */
 .content {
     padding: 10px;
+    flex-grow: 1;
     overflow-y: auto;
 }
 
@@ -131,4 +132,14 @@ html, body {
 /* (remove the left margin on the first tag of each card to align it with the second line) */
 .bx--tag:first-child{
     margin-left: 0;
+}
+
+.footer {
+    flex-shrink: 0;
+    height: 70px;
+    width: 100%;
+    background-color: var(--layout-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
