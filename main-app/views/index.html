@@ -93,7 +93,7 @@
                 <label class="bx--label">Your Photo</label>
                 <div class="bx--file" data-file>
                   <label for="photoUpload" class="bx--file-btn bx--btn bx--btn--primary" role="button" tabindex="0">Take photo</label>
-                  <input type="file" accept="image/*" class="bx--file-input" id="photoUpload" data-file-uploader data-target="[data-file-container]" />
+                  <input type="file" accept="image/*" class="bx--file-input" id="photoUpload" onchange="clearFileContainer()" data-file-uploader data-target="[data-file-container]" />
                   <div data-file-container id="fileContainer" class="bx--file-container">
                   </div>
                 </div>
