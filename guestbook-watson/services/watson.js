@@ -16,7 +16,7 @@ class WatsonClient {
     constructor(appEnv) {
         this.appEnv = appEnv;
         //default api-address if not provided by appEnv
-        this.apiUrl = "https://gateway.watsonplatform.net/visual-recognition/api"
+        this.apiUrl = "https://gateway.watsonplatform.net/visual-recognition/api/"
         this.apiKey = null;
 
         //apiKey equals null indicates that the client wasn't initialized yet
@@ -82,7 +82,7 @@ class WatsonClient {
     analyseImage(imageUrl) {
         //call the init() function if apiKey is missing
         if(this.apiKey ===  null){
-            this.init();I
+            this.init();
         }
 
         //check if necessary parameters are missing or undefined
@@ -97,27 +97,23 @@ class WatsonClient {
         // generalEndpoint (/classify):   Returns general information about the image
         //                                like objects, colors and other descriptive 
         //                                classes.
-        // facesEndpoint (/detext_faces): Detects faces in the image and returns data
-        //                                like age, gender and face_location.
         //------------------------------------------------------------------------------
         let generalEndpoint = `/v3/classify?url=${imageUrl}&version=2018-03-19`
-        let facesEndpoint = `/v3/detect_faces?url=${imageUrl}&version=2018-03-19`
 
         //------------------------------------------------------------------------------
-        // Executes both API request simultaneously, spreads the http responses to two
+        // Executes both API request simultaneously, spreads the http responses to multiple
         // variables and combines them as one data object.
         // It returns a promise that can use the data object to execute further functions
         // on it or to catch possible errors.
         //------------------------------------------------------------------------------
         let promise = axios.all([
-            this.watsonRequest(generalEndpoint), //request wrapper function
-            this.watsonRequest(facesEndpoint)    //request wrapper function
-        ]).then(axios.spread((generalRes, facesRes) => {
+            this.watsonRequest(generalEndpoint) //request wrapper function
+        ]).then(axios.spread((generalRes) => {
 
-            // create new object with the data values of both responses
+            // create new object with the data values of all responses
             // -> errors during the request can are catched on the returned
             //    promise
-            let data = {general: generalRes.data, faces: facesRes.data}
+            let data = {general: generalRes.data}
             return data;
 
         }));
