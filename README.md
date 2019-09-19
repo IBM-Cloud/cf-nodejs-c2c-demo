@@ -206,15 +206,13 @@ start command:   ./vendor/initial_startup.rb
 - You have been redirected to an application overview and the app was created. Please wait until the app is started/awake. The status can be found in the header, near to the application name.
 - Additionally, by clicking on the "Visit App URL", you can check the status of the app directly. Afterwards, go back to the IBM Cloud website.
 
-/// FROM HERE
-
-6. Go again to the "Catalog" by clicking on the same-named navigation item but this time go to the "AI" section or open the following link: [https://cloud.ibm.com/catalog?search=label:lite&category=ai](https://cloud.ibm.com/catalog?search=label:lite&category=ai)
-7. Search for the product card "Visual Recognition" and click it to create new API credentials for the IBM Watson API.
+6. Go again to the "Catalog" by clicking on the same-named navigation item but this time go to the "AI" section (sidebar) or open the following link: [https://cloud.ibm.com/catalog?category=ai](https://cloud.ibm.com/catalog?category=ai)
+7. Search for the product card "Visual Recognition" and click on the card to create new API credentials for the IBM Watson API.
 8. Fill out the form for the service creation:
 
+- **Pricing Plans** - Select your prefered pricing plan and memory. The Lite plan is sufficient for our needs.
 - **Service name** - To keep it simple, we will use the name `guestbook-visual` for this service but you can use any other name for it as well.
 - **Tags** - Add the tag `guestbook` to find your resources more easily.
-- **Pricing Plans** - Select your prefered pricing plan and memory. The Lite plan is sufficient for our needs.
 
 8. Click on the button "Create" to submit the form and create the database.
 
@@ -222,20 +220,20 @@ start command:   ./vendor/initial_startup.rb
 
 9. In the sidebar, click on the item "Connections".
 10. Subsequently, on the connections page, click the button "Create connection" to create a new connection configuration between the application and the service.
-11. After selecting the region/location of the previously created application in the filter of the table, you will see the application "guestbook-watson" as an entry in the table.
-12. Hover over the "guestbook-watson" row to find the "Create" button and click on it.
+11. After selecting the region/location of the previously created application in the filter of the table, you will see the application `guestbook-watson` as an entry in the table.
+12. Hover over the `guestbook-watson` row to find the "Create" button and click on it.
 13. In the form for creating the connection, you can stay with the default values. The "Access Role" should be `Manager`. Following, click on the "Connect & restage app" button.
-14. You have to confirm the restaging of the "guestbook-watson" application in another popup.
-15. In the table, under "Connected Applications", you will find "guestbook-watson" as an entry. Click on the "guestbook-watson" row to go to the application dashboard.
+14. You have to confirm the restaging of the `guestbook-watson` application in another popup.
+15. In the table, under "Connected Applications", you will find `guestbook-watson` as an entry. Click on the `guestbook-watson` row to go to the application dashboard.
 
 #### Local Testing (Main-App + Watson-App) (optional)
 
 Local Testing is only necessary if you consider modifying the application code. Testing the second application is more complicated than testing the first one. The Watson API requires a public URL of the image which it is going to analyse. While Cloudant lets you save files in an integrated Blob-store as well, it does require authentification for accessing the uploaded files via public URLs. That's why the main-app provides a public URL and pipes the file-stream from Cloudant instead. However, this requires a deployed version of the main-app ("guestbook-main") and some configuration which is described in this section.
 
-1. Make sure the "Main-App" is deployed to Cloud Foundry and running online (see section Main-App > Cloud Foundry Deployment in this manual)
-2. Open the application dashboard of the "guestbook-watson" CF application (for example by navigating to [https://cloud.ibm.com/resources?groups=cf-application](https://cloud.ibm.com/resources?groups=cf-application) and clicking on the application name ("guestbook-watson")).
-3. On the application dashboard of the "guestbook-watson" CF app, click on "Connections" in the sidebar.
-4. In the table, you will see the connection to the watson-service "guestbook-visual" as an entry. In its row, click on the 3 horizontal dots to open the menu.
+1. Make sure the "Main-App"/`guestbook-main` is deployed to Cloud Foundry and running online (see section Main-App > Cloud Foundry Deployment in this manual)
+2. Open the application dashboard of the `guestbook-watson` CF application (for example by navigating to [https://cloud.ibm.com/resources?groups=cf-application](https://cloud.ibm.com/resources?groups=cf-application) and clicking on your application name).
+3. On the application dashboard of the `guestbook-watson` CF app, click on "Connections" in the sidebar.
+4. In the table, you will see the connection to the watson-service `guestbook-visual` as an entry. In its row, click on the 3 horizontal dots to open the menu.
 5. In the menu, click on "View credentials" to open a popup with the credentials for this connection.
 6. Copy the displayed code block either by clicking on the small copy icon or by selecting the code and copying it by using CTLR/CMD + C.
 7. Open your code-editor now and go into the subdirectory "watson-app".
@@ -269,7 +267,7 @@ Local Testing is only necessary if you consider modifying the application code. 
 - If you only want to test the functionality of "watson-app", you can simply send HTTP-requests (for example by using curl or Postman) to `http://localhost:3000/api/image`.
 
 12. In your terminal, navigate into the folder "main-app" by using the command: `cd <Path to folder>`.
-13. Start the main-app server with the `WATSON_IMAGE_URL` environment variable provided. This can be done by using the command: `WATSON_IMAGE_URL=<url of deployed guestbook-main> npm run dev` (on Linux/Mac) or with the command `setx WATSON_IMAGE_URL=<url of deployed guestbook-main> && npm run dev` (on Windows). (The URL of "guestbook-main" can be retrieved by visiting [http://cloud.ibm.com/resources?groups=cf-application](http://cloud.ibm.com/resources?groups=cf-application), clicking on the application name ("guestbook-main") to open the dashboard and finally clicking on the button/label "Visit App URL".) After copying and pasting the URL, this will start the main-app locally with its public CF URL provided.
+13. Start the main-app server with the `WATSON_IMAGE_URL` environment variable provided. This can be done by using the command: `WATSON_IMAGE_URL=<url of deployed guestbook-main> npm run dev` (on Linux/Mac) or with the command `setx WATSON_IMAGE_URL=<url of deployed guestbook-main> && npm run dev` (on Windows). (The URL of `guestbook-main` can be retrieved by visiting [http://cloud.ibm.com/resources?groups=cf-application](http://cloud.ibm.com/resources?groups=cf-application), clicking on the specific application name to open the dashboard and finally clicking on the button/label "Visit App URL".) After copying and pasting the URL, this will start the main-app locally with its public CF URL provided.
 
 - `WATSON_IMAGE_URL` is the _public_ URL of "guestbook-main". Because the images from Cloudant are piped via "guestbook-main", this URL is used to create the public Image-URL which is used by Watson. It is necessary to use a _public_ URL because Watson can't access the applications on your localhost.
 - **Please make sure to use URLs in the formats `https://<...>/` or `http://<...>/`. Invalid or wrong URLs will cause errors in the communication between main-app and watson-app! (example: https://guestbook-main-xyz.eu-gb.mybluemix.net/)**
@@ -310,7 +308,7 @@ _Troubleshooting (if the applications don't work properly):_
     routes:            <ROUTE>
 ```
 
-6. In your browser, navigate to the dashboard of "guestbook-main". (For example by visiting [http://cloud.ibm.com/resources?groups=cf-application](http://cloud.ibm.com/resources?groups=cf-application) and clicking on the application name ("guestbook-main"))
+6. In your browser, navigate to the dashboard of `guestbook-main`. (For example by visiting [http://cloud.ibm.com/resources?groups=cf-application](http://cloud.ibm.com/resources?groups=cf-application) and clicking on the application name)
 7. Subsequently, in the sidebar, click on "Runtime" and then on the "Runtime" page, select "Environmental variables"
 8. In the "User defined" section, add these two variables:
 

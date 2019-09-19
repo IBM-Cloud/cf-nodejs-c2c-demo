@@ -9,12 +9,12 @@ const WatsonClient = require('./watson'); //import WatsonClient class
 //------------------------------------------------------------------------------
 let vcapLocal;
 try {
-    vcapLocal = require('../vcap-local.json'); //import json data
+    vcapLocal = require('../vcap-local.json.js'); //import json data
     console.log("Loaded local VCAP", vcapLocal);
 } catch (e) { 
-    console.error(e) 
-    return; // stop execution on error
+    console.error("If you are running this application locally, you might forgot to rename the `vcap-local.json.example` file.")
 }
+
 const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {}; //check if vcapLocal is undefined or null
 const appEnv = cfenv.getAppEnv(appEnvOpts); //create CloudFoundry App Enviroment from vcapLocal
 
