@@ -38,4 +38,4 @@ console.log("[ENV] Server Port: " + (process.env.PORT || "3000"));
 // Start http server
 //------------------------------------------------------------------------------
 //if not defined as enviroment variable, the port on localhost is 3000
-app.listen(port, () => console.log(`Listening on port: ${port}`));
+app.listen(port, () => console.log(`Listening on port: ${port}, Link: http://localhost:${port}`));

@@ -196,3 +196,7 @@ $( document ).ready(function(){
     var watsonLoading = Loading.create(document.getElementById('watsonLoading'));
     watsonLoading.set(false);
 })
+
+function clearFileContainer() {
+    $('#fileContainer').children().remove()
+} 

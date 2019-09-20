@@ -47,4 +47,4 @@ console.log("[ENV] Watson Microservice: " + (process.env.WATSON_SERVICE_URL || "
 // Start http server
 //------------------------------------------------------------------------------
 //if not defined as enviroment variable, the port on localhost is 5000
-app.listen(port, () => console.log(`Listening on port: ${port}`))
+app.listen(port, () => console.log(`Listening on port: ${port}, Link: http://localhost:${port}`))
