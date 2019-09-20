@@ -15,6 +15,24 @@ POST | /api/guests | API Route for adding a new entry to the Guestbook. Hereby, 
 GET | /api/attachment/{fileName} | Simple API Route which can be used as link to the entry image. `{fileName}` can be retrieved by `GET /api/guests` | -
 
 ___
+## Custom Logo
+
+1) Put an **SVG Image** of the logo into the following folder: `main-app/views/assets/images/`.
+> It is recommend to change the name of the image file to something rememberable (e.g. name of the company).
+2) Open the file `main-app/views/index.html`.
+3) In the following lines (around 31-32):
+```
+<!-- >>> CHANGE LOGO HERE <<< -->  
+<img class="logo" src="./assets/images/ibm.svg" alt="logo">
+```
+change the path/file in the `src` attribute of the `img` component to the one of the new logo:
+```
+<!-- >>> CHANGE LOGO HERE <<< -->  
+<img class="logo" src="./assets/images/<YOUR FILE NAME + EXTENSION HERE>" alt="logo">
+```
+4) Save the file and push or restart the application.
+
+___
 ## Troubleshooting
 
 Most of the issues that can occur in setting up this issue are due to wrong URLs or defect service connections. If you stumble upon an issue, for example, if the tags are not loading on creating a Guestbook entry, try the following things:
