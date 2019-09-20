@@ -9,7 +9,7 @@ const CloudantClient = require('./cloudant'); //import CloudantClient class
 //------------------------------------------------------------------------------
 let vcapLocal;
 try {
-    vcapLocal = require('../vcap-local.json.js'); //import json data
+    vcapLocal = require('../vcap-local.json'); //import json data
     console.log("Loaded local VCAP", vcapLocal);
 } catch (e) { 
     console.error("If you are running this application locally, you might forgot to rename the `vcap-local.json.example` file.") 
