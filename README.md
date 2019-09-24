@@ -11,13 +11,13 @@ This project is a demonstration of Node.js Microservices and Container-to-Contai
 - [Deployment](#deployment)
   - [Prerequisites](#prerequisites)
   - [Local Setup](#local-setup)
-  - [Main-App](#main-app)
-    - [Local Testing (Main-App) (optional)](#local-testing-main-app-optional)
-    - [Cloud Foundry Deployment (Main-App) (required)](#cloud-foundry-deployment-main-app-required)
-  - [Watson-App](#watson-app)
-    - [Local Testing (Main-App + Watson-App) (optional)](#local-testing-main-app--watson-app-optional)
-    - [Cloud Foundry Deployment (Watson-App) (required)](#cloud-foundry-deployment-watson-app-required)
+  - [Guestbook-Main](#guestbook-main)
+  - [Guestbook-Watson](#guestbook-watson)
+  - [Connecting Both Applications](#connecting-both-applications)
+  - [Local Testing (optional)](#local-testing-optional)
   - [Container-to-Container Networking](#container-to-container-networking)
+    - [Deploying Guestbook-Main locally](#deploying-guestbook-main-locally)
+    - [Deploying Guestbook-Watson locally](#deploying-guestbook-watson-locally)
 - [License](#license)
  
 ## Architecture
@@ -276,7 +276,7 @@ In opposite to the second application of our example, `guestbook-main` does not 
 
 - The app should be reachable in your local browser by using the URL: [http://localhost:5000/](http://localhost:5000/)
 
-#### Deploying Guestbook-Watson locally
+### Deploying Guestbook-Watson locally
 
 Testing the second application is more complicated than testing the first one. The Watson API requires a public URL of the image which is going to be analysed. While Cloudant lets you save files in an integrated Blob-store as well, it does require authentification for accessing the uploaded files via public URLs. That's why `guestbook-main` provides a public URL and pipes the file-stream from Cloudant instead. However, this requires a deployed version of `guestbook-main` and some configuration which is described in this section.
 
