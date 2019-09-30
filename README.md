@@ -1,8 +1,8 @@
-# Container-to-Container Networking IBM CF Demo
+# IBM Cloud Foundry Demo
 
 ## Description
 
-This project is a demonstration of Node.js Microservices and Container-to-Container networking on IBM Cloud Foundry. It involves two distinct microservices in combination with a Cloudant NoSQL database and the Watson Visual Recognition API which provide a simple 'Guestbook' functionality to the user. To demonstrate the concept of Container-to-Container networking, the second microservice which connects to the Watson API is not required for the basic functionality of the application (add a guest, show all guests) and can be added separately afterwards. This helps to show that both microservices/CF applications communicate directly with each other and that the second service only needs an internal route due to the configurated networking policy.
+This project is a demonstration of Node.js Microservices and Container-to-Container networking on IBM Cloud Foundry Public. It involves two distinct microservices in combination with a Cloudant NoSQL database and the Watson Visual Recognition API which provide a simple 'Guestbook' functionality to the user. To demonstrate the concept of Container-to-Container networking, the second microservice which connects to the Watson API is not required for the basic functionality of the application (add a guest, show all guests) and can be added separately afterwards. This helps to show that both microservices/CF applications communicate directly with each other and that the second service only needs an internal route due to the configurated networking policy.
 
 ## Table of Contents
 
