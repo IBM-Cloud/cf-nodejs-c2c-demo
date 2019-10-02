@@ -53,7 +53,7 @@ This repository includes both microservices/Node.js applications, "guestbook-mai
 ### Local Setup
 
 1. First, open a terminal in a directory of your choice on your local computer.
-2. Clone this Git repository by using the command: `git clone https://github.com/m-lukas/cf-nodejs-c2c-demo.git`.
+2. Clone this Git repository by using the command: `git clone https://github.com/IBM-Cloud/cf-nodejs-c2c-demo.git`.
 3. Following, use the command `cd cf-nodejs-c2c-demo` to navigate into the project directory.
 4. Furthermore, open the project in the code-editor/IDE of your choice.
 
