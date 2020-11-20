@@ -202,16 +202,16 @@ This step can only be done after "guestbook-main" and "guestbook-watson" are run
 
 - **Example** based on the image above: `ibmcloud cf delete-route eu-gb.mybluemix.net --hostname guestbook-watson-shy-panda`
 
-3. After deleting the public route, we will create a private route using: `ibmcloud cf map-route guestbook-watson apps.internal --hostname <host>`
+3. After deleting the public route, we will create a private route using: `ibmcloud cf map-route guestbook-watson apps.internal --hostname <former host of guestbook-watson>`
 
 - It is recommended to use the same hostname for the private route as of the public route to avoid confusion.
-- **Example** based on the image above: `ibmcloud cf map-route guestbook-watson apps.internal --hostname guestbook-main-funny-kudu`
+- **Example** based on the image above: `ibmcloud cf map-route guestbook-watson apps.internal --hostname guestbook-watson-shy-panda`
 
 4. Following, you can use `ibmcloud cf routes` again to verify the changes.
 5. Copy the new private route (ending on `apps.internal`) from the output of step 3 or 4.
 6. Now, we will update the connection to "guestbook-main": Use the command `ibmcloud cf set-env guestbook-main WATSON_SERVICE_URL <http:// + private route of guestbook-watson + :8080>` to update the environmental variable. We need to add the HTTP protocol and additionally, we need to add the port `:8080` to make the internal connection working.
 
-- **Example** for the URL: `http://guestbook-main-funny-kudu.eu-gb.mybluemix.net:8080` (Please notice the **http://** instead of **https://**!)
+- **Example** for the URL: `http://guestbook-watson-shy-panda.apps.internal:8080` (Please notice the **http://** instead of **https://**!)
 
 7. After updating the environmental variable, we need to restage "guestbook-main" again by using `ibmcloud cf restage guestbook-main`.
 
