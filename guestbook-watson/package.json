@@ -18,7 +18,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "request": "^2.88.0",
-    "sharp": "^0.22.1",
+    "sharp": "^0.30.5",
     "uuidv4": "^4.0.0"
   },
   "devDependencies": {
